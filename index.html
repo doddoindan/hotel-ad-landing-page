@@ -97,6 +97,36 @@
             /* Subtle blur to make text pop */
         }
 
+        .cat-decoration {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 35vh;
+            /* Occupies bottom third */
+            z-index: 0;
+            /* Above overlay (dom order), below content (z-1) */
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            pointer-events: none;
+            /* Allows clicks to pass through if needed */
+        }
+
+        .cat-decoration img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            /* Fills the strip */
+            object-position: center top;
+            opacity: 0.9;
+            /* Slight blend */
+            mask-image: linear-gradient(to bottom, transparent 0%, black 20%);
+            /* Soft fade top edge */
+            -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 20%);
+            filter: brightness(0.7);
+        }
+
         .content {
             position: relative;
             z-index: 1;
@@ -115,39 +145,53 @@
 
         h1 {
             color: var(--text-color);
-            font-size: clamp(2.5rem, 10vw, 4.5rem);
-            font-weight: 900;
-            text-transform: uppercase;
-            text-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-            line-height: 1.1;
             margin-bottom: 24px;
             animation: slideIn 0.8s ease-out;
-            letter-spacing: -1px;
+            text-transform: uppercase;
+            text-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+            font-weight: 900;
+            line-height: 1;
         }
 
-        h1 span {
+        h1 .main-text {
             display: block;
-            font-size: 0.6em;
-            /* Smaller size for top line */
-            font-weight: 700;
-            opacity: 0.9;
+            font-size: clamp(2.7rem, 10.5vw, 5rem);
+            /* Reduced by ~10% */
+            letter-spacing: -2px;
             margin-bottom: 5px;
+            font-weight: 900;
+        }
+
+        h1 .sub-text {
+            display: block;
+            font-size: clamp(1.1rem, 4.5vw, 2.2rem);
+            /* Reduced by ~10% */
+            background: linear-gradient(to right, #ff9e60, #ffd54f);
+            /* Brighter Orange-Gold Gradient */
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 800;
+            opacity: 1;
+            letter-spacing: 0.5px;
+            padding-bottom: 2px;
+            line-height: 1.2;
         }
 
         .subtitle-badge {
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            background: transparent;
+            border: none;
+            backdrop-filter: none;
+            box-shadow: none;
             color: var(--accent-color);
             font-size: clamp(1rem, 4vw, 1.5rem);
             font-weight: 700;
-            padding: 12px 24px;
-            border-radius: 50px;
+            padding: 0;
             margin-bottom: 40px;
             animation: slideIn 0.8s ease-out 0.2s backwards;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
             text-transform: uppercase;
             letter-spacing: 1px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
         }
 
         .cta-button {
@@ -234,9 +278,18 @@
                 margin-bottom: 20px;
             }
 
+            h1 .main-text {
+                font-size: 2.7rem;
+            }
+
+            h1 .sub-text {
+                font-size: 1.35rem;
+                line-height: 1.2;
+            }
+
             .subtitle-badge {
                 margin-bottom: 30px;
-                padding: 10px 20px;
+                padding: 0;
             }
 
             .cta-button {
@@ -286,10 +339,14 @@
         </div>
     </div>
     <div class="overlay"></div>
+    <div class="cat-decoration">
+        <img src="https://res.cloudinary.com/doddoindan/image/upload/v1767808236/cat-vibing_gujmjk.jpg"
+            alt="Vibing Cat">
+    </div>
 
     <div class="content">
-        <h1><span>LOCAL BUDGET HOTEL</span>LAST MINUTE</h1>
-        <div class="subtitle-badge">LATE CHECKOUT FREE</div>
+        <h1><span class="main-text">LAST MINUTE</span><span class="sub-text">UNION CITY BUDGET HOTEL</span></h1>
+        <div class="subtitle-badge">CHECKOUT LATE BY 3PM</div>
         <a href="tel:+1 (201) 878-8002" class="cta-button">
             <!-- Phone Icon -->
             <svg viewBox="0 0 24 24">
