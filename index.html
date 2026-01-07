@@ -40,6 +40,8 @@
             /* Dynamic viewport height for mobile browsers */
             position: relative;
             background-color: #1a1a1a;
+            cursor: pointer;
+            /* Indicates entire page is clickable */
         }
 
         .background-slider {
@@ -93,7 +95,7 @@
             height: 100%;
             background: var(--bg-overlay);
             z-index: 0;
-            backdrop-filter: blur(2px);
+            backdrop-filter: blur(1px);
             /* Subtle blur to make text pop */
         }
 
@@ -106,7 +108,8 @@
             /* Occupies bottom third */
             z-index: 0;
             /* Above overlay (dom order), below content (z-1) */
-            display: flex;
+            display: none;
+            /* Hidden on desktop */
             justify-content: center;
             align-items: flex-end;
             pointer-events: none;
@@ -132,12 +135,17 @@
             z-index: 1;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: flex-start;
+            /* Aligns content to top */
             align-items: center;
             height: 100vh;
             height: 100dvh;
             text-align: center;
             padding: 20px;
+            padding-top: 5vh;
+            /* Reduced top spacing */
+            padding-bottom: 30vh;
+            /* Space at bottom for cat and to lift CTA */
             max-width: 600px;
             margin: 0 auto;
             width: 100%;
@@ -145,17 +153,19 @@
 
         h1 {
             color: var(--text-color);
-            margin-bottom: 24px;
+            margin-bottom: auto;
+            /* Pushes CTA to the bottom */
             animation: slideIn 0.8s ease-out;
             text-transform: uppercase;
             text-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
             font-weight: 900;
             line-height: 1;
+            width: 100%;
         }
 
         h1 .main-text {
             display: block;
-            font-size: clamp(2.7rem, 10.5vw, 5rem);
+            font-size: clamp(2.2rem, 10.5vw, 5rem);
             /* Reduced by ~10% */
             letter-spacing: -2px;
             margin-bottom: 5px;
@@ -176,18 +186,21 @@
             letter-spacing: 0.5px;
             padding-bottom: 2px;
             line-height: 1.2;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.9));
+            /* Strong drop shadow */
         }
 
         .subtitle-badge {
             background: transparent;
+            margin-top: 1rem;
             border: none;
             backdrop-filter: none;
             box-shadow: none;
             color: var(--accent-color);
-            font-size: clamp(1rem, 4vw, 1.5rem);
+            font-size: clamp(1.5rem, 4vw, 1.5rem);
             font-weight: 700;
             padding: 0;
-            margin-bottom: 40px;
+            margin-bottom: 25vh !important;
             animation: slideIn 0.8s ease-out 0.2s backwards;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -260,6 +273,13 @@
             }
         }
 
+        @media (max-width: 1024px) {
+            .cat-decoration {
+                display: flex;
+                /* Visible on tablets and mobile */
+            }
+        }
+
         /* Mobile Optimization */
         @media (max-width: 480px) {
             .content {
@@ -275,7 +295,7 @@
             }
 
             h1 {
-                margin-bottom: 20px;
+                margin-bottom: auto;
             }
 
             h1 .main-text {
@@ -294,6 +314,11 @@
 
             .cta-button {
                 padding: 18px 30px;
+            }
+
+            .cat-decoration {
+                display: flex;
+                /* Visible only on mobile */
             }
         }
     </style>
@@ -327,26 +352,33 @@
     <div class="background-slider">
         <div class="bg-image active">
             <img src="https://res.cloudinary.com/doddoindan/image/upload/v1742497197/bunk_bed_shared_latest_qg7t0u.jpg"
-                alt="Hotel Room - Bunk Bed Shared">
+                alt="Hotel Room - Bunk Bed Shared" style="object-position: left calc(50% - 30px);">
         </div>
-        <div class="bg-image">
-            <img src="https://res.cloudinary.com/doddoindan/image/upload/v1751994465/large_bed_private_new_tggs6i.jpg"
-                alt="Hotel Room - Large Bed Private">
+        <!---
+        <div class=" bg-image">
+            <img src="https://res.cloudinary.com/doddoindan/image/upload/v1741179895/bunk_bed_shared_new_new_ppaazw.jpg"
+                alt="Hotel Room - Large Bed Private" style="object-position: left calc(50% - 130px);">
         </div>
+        -->
         <div class="bg-image">
             <img src="https://res.cloudinary.com/doddoindan/image/upload/v1742496215/bunk_bd_private_bath_pioiml.jpg"
-                alt="Hotel Room - Private Bath">
+                alt="Hotel Room - Private Bath" style="object-position: left calc(50% - 120px);">
         </div>
     </div>
-    <div class="overlay"></div>
+    <div class=" overlay">
+    </div>
     <div class="cat-decoration">
         <img src="https://res.cloudinary.com/doddoindan/image/upload/v1767808236/cat-vibing_gujmjk.jpg"
             alt="Vibing Cat">
     </div>
 
     <div class="content">
-        <h1><span class="main-text">LAST MINUTE</span><span class="sub-text">UNION CITY BUDGET HOTEL</span></h1>
-        <div class="subtitle-badge">CHECKOUT LATE BY 3PM</div>
+        <h1>
+            <span class="sub-text">In Union City Late and You're on a Budget?</span>
+            <span class="main-text">LAST MINUTE HOTEL ROOM</span>
+
+        </h1>
+
         <a href="tel:+1 (201) 878-8002" class="cta-button">
             <!-- Phone Icon -->
             <svg viewBox="0 0 24 24">
@@ -355,6 +387,7 @@
             </svg>
             CALL NOW
         </a>
+        <div class="subtitle-badge">CHECKOUT LATE - BY 3PM</div>
     </div>
 
     <script>
@@ -382,6 +415,14 @@
         });
 
         setInterval(changeImage, 5000);
+
+        // Click anywhere to call
+        document.addEventListener('click', (e) => {
+            // Return if clicking the button (let default link behavior work)
+            if (e.target.closest('.cta-button')) return;
+
+            window.location.href = 'tel:+1 (201) 878-8002';
+        });
     </script>
 </body>
 
