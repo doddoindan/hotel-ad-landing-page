@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Local Project Budget Hotel - Last Minute Deals. Late Checkout Free. Call Now to Book!">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Local Budget Hotel - Call Now</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #ff6b35;
+            --secondary-color: #f7931e;
+            --text-color: #ffffff;
+            --accent-color: #ffeb3b;
+            --bg-overlay: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.6) 50%, rgba(0, 0, 0, 0.8) 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            overflow-x: hidden;
+            height: 100vh;
+            height: 100dvh;
+            /* Dynamic viewport height for mobile browsers */
+            position: relative;
+            background-color: #1a1a1a;
+            cursor: pointer;
+            /* Indicates entire page is clickable */
+        }
+
+        .background-slider {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .bg-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+            transform: scale(1.1);
+            /* Slight zoom for parallax feel */
+            animation: zoomEffect 20s infinite alternate;
+        }
+
+        @keyframes zoomEffect {
+            from {
+                transform: scale(1);
+            }
+
+            to {
+                transform: scale(1.1);
+            }
+        }
+
+        .bg-image.active {
+            opacity: 1;
+        }
+
+        .bg-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-overlay);
+            z-index: 0;
+            backdrop-filter: blur(1px);
+            /* Subtle blur to make text pop */
+        }
+
+        .cat-decoration {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 35vh;
+            /* Occupies bottom third */
+            z-index: 0;
+            /* Above overlay (dom order), below content (z-1) */
+            display: none;
+            /* Hidden on desktop */
+            justify-content: center;
+            align-items: flex-end;
+            pointer-events: none;
+            /* Allows clicks to pass through if needed */
+        }
+
+        .cat-decoration img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            /* Fills the strip */
+            object-position: center top;
+            opacity: 0.9;
+            /* Slight blend */
+            mask-image: linear-gradient(to bottom, transparent 0%, black 20%);
+            /* Soft fade top edge */
+            -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 20%);
+            filter: brightness(0.7);
+        }
+
+        .content {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            /* Aligns content to top */
+            align-items: center;
+            height: 100vh;
+            height: 100dvh;
+            text-align: center;
+            padding: 20px;
+            padding-top: 5vh;
+            /* Reduced top spacing */
+            padding-bottom: 30vh;
+            /* Space at bottom for cat and to lift CTA */
+            max-width: 600px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        h1 {
+            color: var(--text-color);
+            margin-bottom: auto;
+            /* Pushes CTA to the bottom */
+            animation: slideIn 0.8s ease-out;
+            text-transform: uppercase;
+            text-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+            font-weight: 900;
+            line-height: 1;
+            width: 100%;
+        }
+
+        h1 .main-text {
+            display: block;
+            font-size: clamp(2.2rem, 10.5vw, 5rem);
+            /* Reduced by ~10% */
+            letter-spacing: -2px;
+            margin-bottom: 5px;
+            font-weight: 900;
+        }
+
+        h1 .sub-text {
+            display: block;
+            font-size: clamp(1.1rem, 4.5vw, 2.2rem);
+            /* Reduced by ~10% */
+            background: linear-gradient(to right, #ff9e60, #ffd54f);
+            /* Brighter Orange-Gold Gradient */
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 800;
+            opacity: 1;
+            letter-spacing: 0.5px;
+            padding-bottom: 2px;
+            line-height: 1.2;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.9));
+            /* Strong drop shadow */
+        }
+
+        .subtitle-badge {
+            background: transparent;
+            margin-top: 1rem;
+            border: none;
+            backdrop-filter: none;
+            box-shadow: none;
+            color: var(--accent-color);
+            font-size: clamp(1.5rem, 4vw, 1.5rem);
+            font-weight: 700;
+            padding: 0;
+            margin-bottom: 25vh !important;
+            animation: slideIn 0.8s ease-out 0.2s backwards;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            font-size: clamp(1.2rem, 5vw, 1.8rem);
+            font-weight: 800;
+            padding: 20px 48px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 10px 25px rgba(247, 147, 30, 0.4);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            animation: slideIn 0.8s ease-out 0.4s backwards, pulse 2s infinite 3s;
+            width: 100%;
+            max-width: 350px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .cta-button svg {
+            width: 24px;
+            height: 24px;
+            fill: currentColor;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 15px 35px rgba(247, 147, 30, 0.6);
+            filter: brightness(1.1);
+        }
+
+        .cta-button:active {
+            transform: translateY(-1px) scale(0.98);
+            box-shadow: 0 5px 15px rgba(247, 147, 30, 0.4);
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(247, 147, 30, 0.7);
+            }
+
+            70% {
+                box-shadow: 0 0 0 15px rgba(247, 147, 30, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(247, 147, 30, 0);
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .cat-decoration {
+                display: flex;
+                /* Visible on tablets and mobile */
+            }
+        }
+
+        /* Mobile Optimization */
+        @media (max-width: 480px) {
+            .content {
+                padding: 20px;
+                /* Reverted to center alignment as requested */
+                justify-content: center;
+                padding-bottom: 20px;
+            }
+
+            .bg-image img {
+                /* alignment for mobile background images */
+                object-position: left center;
+            }
+
+            h1 {
+                margin-bottom: auto;
+            }
+
+            h1 .main-text {
+                font-size: 2.7rem;
+            }
+
+            h1 .sub-text {
+                font-size: 1.35rem;
+                line-height: 1.2;
+            }
+
+            .subtitle-badge {
+                margin-bottom: 30px;
+                padding: 0;
+            }
+
+            .cta-button {
+                padding: 18px 30px;
+            }
+
+            .cat-decoration {
+                display: flex;
+                /* Visible only on mobile */
+            }
+        }
+    </style>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17833937422"></script>
+    <script> window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', 'AW-17833937422'); </script>
+    <!-- Facebook Pixel Code -->
+    <script>
+        !function (f, b, e, v, n, t, s) {
+            if (f.fbq) return; n = f.fbq = function () {
+                n.callMethod ?
+                    n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+            };
+            if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+            n.queue = []; t = b.createElement(e); t.async = !0;
+            t.src = v; s = b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t, s)
+        }(window, document, 'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '1973123099833945');
+        fbq('track', 'PageView');
+    </script>
+    <noscript>
+        <img height="1" width="1" style="display:none"
+            src="https://www.facebook.com/tr?id=1973123099833945&ev=PageView&noscript=1" />
+    </noscript>
+    <!-- End Facebook Pixel Code -->
+</head>
+
+<body>
+    <div class="background-slider">
+        <div class="bg-image active">
+            <img src="https://res.cloudinary.com/doddoindan/image/upload/v1742497197/bunk_bed_shared_latest_qg7t0u.jpg"
+                alt="Hotel Room - Bunk Bed Shared" style="object-position: left calc(50% - 30px);">
+        </div>
+        <!---
+        <div class=" bg-image">
+            <img src="https://res.cloudinary.com/doddoindan/image/upload/v1741179895/bunk_bed_shared_new_new_ppaazw.jpg"
+                alt="Hotel Room - Large Bed Private" style="object-position: left calc(50% - 130px);">
+        </div>
+        -->
+        <div class="bg-image">
+            <img src="https://res.cloudinary.com/doddoindan/image/upload/v1742496215/bunk_bd_private_bath_pioiml.jpg"
+                alt="Hotel Room - Private Bath" style="object-position: left calc(50% - 120px);">
+        </div>
+    </div>
+    <div class=" overlay">
+    </div>
+    <div class="cat-decoration">
+        <img src="https://res.cloudinary.com/doddoindan/image/upload/v1767808236/cat-vibing_gujmjk.jpg"
+            alt="Vibing Cat">
+    </div>
+
+    <div class="content">
+        <h1>
+            <span class="sub-text">In Union City Late and You're on a Budget?</span>
+            <span class="main-text">LAST MINUTE HOTEL ROOM</span>
+
+        </h1>
+
+        <a href="tel:+1 (201) 878-8002" class="cta-button">
+            <!-- Phone Icon -->
+            <svg viewBox="0 0 24 24">
+                <path
+                    d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
+            </svg>
+            CALL NOW
+        </a>
+        <div class="subtitle-badge">CHECKOUT LATE - BY 3PM</div>
+    </div>
+
+    <script>
+        const images = document.querySelectorAll('.bg-image');
+        let currentIndex = 0;
+
+        function changeImage() {
+            // Find current active image content to fade out
+            const currentImg = images[currentIndex];
+            currentImg.classList.remove('active');
+
+            // Move to next image
+            currentIndex = (currentIndex + 1) % images.length;
+            const nextImg = images[currentIndex];
+            nextImg.classList.add('active');
+        }
+
+        // Preload images to prevent flicker
+        window.addEventListener('load', () => {
+            images.forEach(div => {
+                const img = div.querySelector('img');
+                if (img && img.complete) return;
+                // Simple check, real preload would be separate
+            });
+        });
+
+        setInterval(changeImage, 5000);
+
+        // Click anywhere to call
+        document.addEventListener('click', (e) => {
+            // Return if clicking the button (let default link behavior work)
+            if (e.target.closest('.cta-button')) return;
+
+            window.location.href = 'tel:+1 (201) 878-8002';
+        });
+    </script>
+</body>
+
+</html>
