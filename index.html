@@ -379,7 +379,7 @@
 
         </h1>
 
-        <a href="tel:+1 (201) 878-8002" class="cta-button">
+        <a href="tel:+1 (201) 878-8002" class="cta-button" onclick="return gtag_report_conversion(this.href);">
             <!-- Phone Icon -->
             <svg viewBox="0 0 24 24">
                 <path
@@ -416,12 +416,28 @@
 
         setInterval(changeImage, 5000);
 
+        // Google Ads Conversion tracking
+        function gtag_report_conversion(url) {
+            var callback = function () {
+                if (typeof (url) != 'undefined') {
+                    window.location = url;
+                }
+            };
+            // IMPORTANT: Replace 'YOUR_CONVERSION_LABEL_HERE' with your actual conversion label from Google Ads
+            // Example: 'AW-17833937422/AbCdEfGhIjKlMnOpQr'
+            gtag('event', 'conversion', {
+                'send_to': 'AW-17833937422/II4ACPjaieAbEI6U8bdC',
+                'event_callback': callback
+            });
+            return false;
+        }
+
         // Click anywhere to call
         document.addEventListener('click', (e) => {
-            // Return if clicking the button (let default link behavior work)
+            // Return if clicking the button (it handles its own click via onclick attribute)
             if (e.target.closest('.cta-button')) return;
 
-            window.location.href = 'tel:+1 (201) 878-8002';
+            //gtag_report_conversion('tel:+1 (201) 878-8002');
         });
     </script>
 </body>
