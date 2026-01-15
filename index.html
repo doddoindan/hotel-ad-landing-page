@@ -5,11 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
-        content="Local Project Budget Hotel - Last Minute Deals. Late Checkout Free. Call Now to Book!">
+        content="Affordable last-minute budget hotel rooms in Union City, NJ. Located at 415 38th St. Get FREE late checkout until 3 PM when you mention Google. Book your stay now!">
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
-    <title>Local Budget Hotel - Call Now</title>
+    <title>Last Minute Budget Hotel Union City NJ | Book Now & Free Late Checkout</title>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -84,7 +84,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            object-position: center;
+            object-position: center calc(50% - 0rem);
         }
 
         .overlay {
@@ -144,7 +144,7 @@
             padding: 20px;
             padding-top: 5vh;
             /* Reduced top spacing */
-            padding-bottom: 30vh;
+            padding-bottom: calc(30vh + 3rem);
             /* Space at bottom for cat and to lift CTA */
             max-width: 600px;
             margin: 0 auto;
@@ -190,6 +190,42 @@
             /* Strong drop shadow */
         }
 
+        h1 .address-text {
+            display: block;
+            font-size: clamp(1.2rem, 5.2vw, 1.7rem);
+            font-weight: 500;
+            text-transform: none;
+            margin-top: 15px;
+            letter-spacing: 0.3px;
+            color: var(--text-color);
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+            opacity: 0.95;
+        }
+
+        h1 .phone-subtext {
+            display: block;
+            font-size: clamp(1rem, 4.5vw, 1.4rem);
+            font-weight: 500;
+            text-transform: none;
+            margin-top: 10px;
+            color: var(--text-color);
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+            letter-spacing: 0.2px;
+        }
+
+        h1 .phone-subtext a {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 700;
+            border-bottom: 2px solid rgba(255, 235, 59, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        h1 .phone-subtext a:hover {
+            border-bottom-color: var(--accent-color);
+            opacity: 0.9;
+        }
+
         .subtitle-badge {
             background: transparent;
             margin-top: 1rem;
@@ -200,11 +236,24 @@
             font-size: clamp(1.5rem, 4vw, 1.5rem);
             font-weight: 700;
             padding: 0;
-            margin-bottom: 25vh !important;
+            margin-bottom: 10px;
+            /* Reduced to bring new text closer */
             animation: slideIn 0.8s ease-out 0.2s backwards;
             text-transform: uppercase;
             letter-spacing: 1px;
             text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+        }
+
+        .mention-google {
+            color: #ffffff;
+            font-size: clamp(1rem, 3.5vw, 1.1rem);
+            font-weight: 500;
+            opacity: 0.9;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+            margin-bottom: calc(25vh + 3rem) !important;
+            /* Pushes content from bottom cat area */
+            animation: slideIn 0.8s ease-out 0.3s backwards;
+            letter-spacing: 0.5px;
         }
 
         .cta-button {
@@ -226,6 +275,8 @@
             animation: slideIn 0.8s ease-out 0.4s backwards, pulse 2s infinite 3s;
             width: 100%;
             max-width: 350px;
+            margin-top: 4.5rem;
+            /* Gap between phone text and button */
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
@@ -286,7 +337,7 @@
                 padding: 20px;
                 /* Reverted to center alignment as requested */
                 justify-content: center;
-                padding-bottom: 20px;
+                padding-bottom: calc(20px + 1rem);
             }
 
             .bg-image img {
@@ -308,12 +359,29 @@
             }
 
             .subtitle-badge {
-                margin-bottom: 30px;
+                margin-bottom: 5px;
                 padding: 0;
+            }
+
+            .mention-google {
+                margin-bottom: calc(40px + 7rem) !important;
+                /* Shorter spacer for mobile */
+            }
+
+            @media (min-height: 800px) {
+                .content {
+                    padding-top: 3rem;
+                }
+
+                .mention-google {
+                    margin-bottom: calc(40px + 10rem) !important;
+                }
             }
 
             .cta-button {
                 padding: 18px 30px;
+                margin-top: 1.5rem;
+                /* Specific gap for mobile */
             }
 
             .cat-decoration {
@@ -351,18 +419,20 @@
 <body>
     <div class="background-slider">
         <div class="bg-image active">
-            <img src="https://res.cloudinary.com/doddoindan/image/upload/v1742497197/bunk_bed_shared_latest_qg7t0u.jpg"
-                alt="Hotel Room - Bunk Bed Shared" style="object-position: left calc(50% - 30px);">
+            <picture>
+                <source media="(max-width: 480px)"
+                    srcset="https://res.cloudinary.com/doddoindan/image/upload/t_mobile/v1768513412/IMG_0951_e6x9vg.jpg">
+                <img src="https://res.cloudinary.com/doddoindan/image/upload/t_desktop/v1768513412/IMG_0951_e6x9vg.jpg"
+                    alt="Hotel Interior - View 1">
+            </picture>
         </div>
-        <!---
-        <div class=" bg-image">
-            <img src="https://res.cloudinary.com/doddoindan/image/upload/v1741179895/bunk_bed_shared_new_new_ppaazw.jpg"
-                alt="Hotel Room - Large Bed Private" style="object-position: left calc(50% - 130px);">
-        </div>
-        -->
         <div class="bg-image">
-            <img src="https://res.cloudinary.com/doddoindan/image/upload/v1742496215/bunk_bd_private_bath_pioiml.jpg"
-                alt="Hotel Room - Private Bath" style="object-position: left calc(50% - 120px);">
+            <picture>
+                <source media="(max-width: 480px)"
+                    srcset="https://res.cloudinary.com/doddoindan/image/upload/t_mobile/v1768513408/IMG_1020_m649ld.jpg">
+                <img src="https://res.cloudinary.com/doddoindan/image/upload/t_desktop/v1768513408/IMG_1020_m649ld.jpg"
+                    alt="Hotel Interior - View 2">
+            </picture>
         </div>
     </div>
     <div class=" overlay">
@@ -376,18 +446,17 @@
         <h1>
             <span class="sub-text">In Union City Late and You're on a Budget?</span>
             <span class="main-text">LAST MINUTE HOTEL ROOM</span>
-
+            <span class="address-text">415 38th St. Union City NJ 07087</span>
+            <span class="phone-subtext">Text or Call <a href="tel:+1 (201) 878-8002"
+                    onclick="return gtag_report_conversion(this.href, true);">+1 (201) 878-8002</a></span>
         </h1>
 
-        <a href="tel:+1 (201) 878-8002" class="cta-button" onclick="return gtag_report_conversion(this.href);">
-            <!-- Phone Icon -->
-            <svg viewBox="0 0 24 24">
-                <path
-                    d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
-            </svg>
-            CALL NOW
+        <a href="https://book.bookingcenter.com/03/?site=CENTHOT" class="cta-button"
+            onclick="return gtag_report_conversion(this.href);">
+            BOOK NOW
         </a>
         <div class="subtitle-badge">CHECKOUT LATE - BY 3PM</div>
+        <div class="mention-google">Mention Google for Free Late Checkout</div>
     </div>
 
     <script>
@@ -417,7 +486,7 @@
         setInterval(changeImage, 5000);
 
         // Google Ads Conversion tracking
-        function gtag_report_conversion(url) {
+        function gtag_report_conversion(url, callClick = false) {
             var callback = function () {
                 if (typeof (url) != 'undefined') {
                     window.location = url;
@@ -425,8 +494,11 @@
             };
             // IMPORTANT: Replace 'YOUR_CONVERSION_LABEL_HERE' with your actual conversion label from Google Ads
             // Example: 'AW-17833937422/AbCdEfGhIjKlMnOpQr'
+            const bookingLabel = 'AW-17833937422/-4vsCLKbkeYbEI6U8bdC';
+            const phoneLabel = 'AW-17833937422/II4ACPjaieAbEI6U8bdC';
+
             gtag('event', 'conversion', {
-                'send_to': 'AW-17833937422/II4ACPjaieAbEI6U8bdC',
+                'send_to': callClick ? phoneLabel : bookingLabel,
                 'event_callback': callback
             });
             return false;
